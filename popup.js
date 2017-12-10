@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
   chrome.storage.sync.get('authToken', function(data) {
     if (typeof data.authToken !== undefined) {
       authToken = data.authToken;
+      chrome.runtime.sendMessage({command: "SetToken", authToken: data.authToken});
       showClockView();
     }
   });
@@ -39,6 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
       },
       success: function(data) {
         chrome.storage.sync.set({'authToken': data.authToken});
+        chrome.runtime.sendMessage({command: "SetToken", authToken: data.authToken});
         showClockView();
       }
     });

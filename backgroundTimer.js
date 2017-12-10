@@ -1,3 +1,4 @@
+var authToken = null;
 var contentArr = [];
 var currentTab = null;
 var currentContent = null;
@@ -26,7 +27,7 @@ function postContent(content) {
     data: JSON.stringify(content),
     headers: {
       'content-type': 'application/json',
-      'Authorization': "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJuYW1lIjoiZGVtbyIsImNvbnRlbnQiOlt7ImNvbnRlbnRJZCI6IjVhMjFmMWExYmYwOGU0MjI5NTFkNDc5ZiIsInRpbWUiOjQ1NSwiY29tcGxldGVkIjp0cnVlfSx7ImNvbnRlbnRJZCI6IjVhMjZkYmVjZTdlZWZlYjJjMmRkZmIxMSIsInRpbWUiOjIyMSwiY29tcGxldGVkIjp0cnVlfSx7ImNvbnRlbnRJZCI6IjVhMjVjMTQzNjE0MzkxNDNiYzRiYTU5MSIsInRpbWUiOjM0MCwiY29tcGxldGVkIjpmYWxzZX0seyJjb250ZW50SWQiOiI1YTIxZjMyYmJmMDhlNDIyOTUxZDQ3YTAiLCJ0aW1lIjo0MjIsImNvbXBsZXRlZCI6ZmFsc2V9LHsiY29udGVudElkIjoiNWEyNmRkYjNlN2VlZmViMmMyZGRmYjM5IiwidGltZSI6MTIwMiwiY29tcGxldGVkIjpmYWxzZX1dfSwiaWF0IjoxNTEyNzc5NjMwLCJleHAiOjE1MTI3ODMyMzAsInN1YiI6ImRlbW8ifQ.XNPHRC1nqNDRQxjTCzSTTR5kkMJVQ_kLJxwqhhnK4-Q"
+      'Authorization': "Bearer " + authToken
     },
     success: function(data) {
       console.log(data);
@@ -56,6 +57,8 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
     currentTab = null;
     timer.stop();
     timer.reset();
+  } else if (message.command == "SetToken") {
+    authToken = message.authToken;
   }
 });
 
