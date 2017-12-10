@@ -1,34 +1,29 @@
 <!doctype html>
 <html>
   <head>
-    <title>Getting Started Extension's Popup</title>
-    <style type="text/css">
-      body {
-        margin: 10px;
-        white-space: nowrap;
-      }
-
-      h1 {
-        font-size: 15px;
-      }
-
-      #container {
-        align-items: center;
-        display: flex;
-        justify-content: space-between;
-      }
-    </style>
+    <title>Memo Companion Extension</title>
     <script src="assets/jquery.min.js"></script>
     <script src="assets/tock.min.js"></script>
     <script src="popup.js"></script>
+    <link rel="stylesheet" href="styles.css">
   </head>
-
   <body>
-    <h1>Memo Extension</h1>
+    <h1>Login to Memo</h1>
     <div id="container">
-      <button id="start">Start</button>
-      <button id="stop">Stop</button>
-      <input id="clock">
+      <div class="login-view">
+        <form class="login-form">
+          <label for="username">Username</label>
+          <input type="text" name="username" id="username" placeholder="Username" />
+          <label for="password">Password</label>
+          <input type="password" name="password" id="password" placeholder="Password" />
+          <button type="submit">Sign In!</button>
+        </form>
+      </div>
+      <div class="clock-view">
+        <button id="start">Start</button>
+        <button id="stop">Stop</button>
+        <input id="clock">
+      </div>
     </div>
   </body>
 </html>

@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css?family=Habibi|Muli:400,600|Playfair+Display:400,900');
+
+body {
+  margin: 10px;
+  white-space: nowrap;
+  width: 280px;
+  font-family: 'Muli', sans-serif;
+}
+
+h1 {
+  font-size: 18px;
+  font-family: 'Playfair Display', serif;
+  font-weight: normal;
+  padding-bottom: 15px;
+  width: 80%;
+  border-bottom: 1px solid black;
+}
+
+#container {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.login-view .login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-view .login-form > * {
+  margin-bottom: 5px;
+}
+
+.login-form input {
+  border: none;
+  outline: none;
+  background-color: #dddddd;
+  padding: 10px;
+}
+
+.login-form button {
+  border: none;
+  padding: 10px 30px;
+  background: red;
+  border-radius: 0;
+  color: white;
+  margin: 10px 0;
+  font-size: 14px;
+}
+
+.clock-view {
+  display: none;
+}
