@@ -1,14 +1,26 @@
 chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
     if (message.type == "time") {
-      $('#clock').val(message.timeSpent);
+      $('#clock').html(message.timeSpent);
     } else {
       console.log("message received: ", message);
-      sendResponse("yoyooyooyoy");
     }
 });
 
 document.addEventListener('DOMContentLoaded', () => {  
-  var currentTabUrl;
+  var currentTabUrl = null;
+  var authToken = null;
+
+  chrome.storage.sync.get('authToken', function(data) {
+    if (typeof data.authToken !== undefined) {
+      authToken = data.authToken;
+      showClockView();
+    }
+  });
+
+  function showClockView() {
+    $('.login-view').hide();
+    $('.clock-view').show().css('display', 'flex');
+  }
 
   $('.login-form').submit(function(e) {
     e.preventDefault();
@@ -26,7 +38,8 @@ document.addEventListener('DOMContentLoaded', () => {
         'content-type': 'application/json'
       },
       success: function(data) {
-        console.log(data);
+        chrome.storage.sync.set({'authToken': data.authToken});
+        showClockView();
       }
     });
   })
@@ -36,11 +49,11 @@ document.addEventListener('DOMContentLoaded', () => {
     currentTab = tab;
   });
 
-  $('#start').on('click', function() {
-    chrome.runtime.sendMessage({command: "StartTimer", tabId: currentTab.id, tabUrl: currentTab.url});
-  });
+  // $('#start').on('click', function() {
+  //   chrome.runtime.sendMessage({command: "StartTimer", tabId: currentTab.id, tabUrl: currentTab.url});
+  // });
 
-  $('#stop').on('click', function () {
-    chrome.runtime.sendMessage({command: "StopTimer"});
-  });
+  // $('#stop').on('click', function () {
+  //   chrome.runtime.sendMessage({command: "StopTimer"});
+  // });
 });

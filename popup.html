@@ -8,10 +8,10 @@
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
-    <h1>Login to Memo</h1>
     <div id="container">
       <div class="login-view">
         <form class="login-form">
+          <h1>Login to Memo</h1>
           <label for="username">Username</label>
           <input type="text" name="username" id="username" placeholder="Username" />
           <label for="password">Password</label>
@@ -20,9 +20,11 @@
         </form>
       </div>
       <div class="clock-view">
-        <button id="start">Start</button>
-        <button id="stop">Stop</button>
-        <input id="clock">
+        <h1>Memo Time Tracker</h1>
+        <p>You've spent</p>
+        <span id="clock">00:00:00</span>
+        <p>reading/viewing this content.</p>
+        <span class="info"><em>This timer will automatically start/stop when it detects an approved piece of Memo content.</em></span>
       </div>
     </div>
   </body>
