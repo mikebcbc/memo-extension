@@ -38,9 +38,9 @@ h1 {
   padding: 10px;
 }
 
-.login-view .login-form button {
+button {
   border: none;
-  padding: 10px 30px;
+  padding: 5px 30px;
   background: red;
   border-radius: 0;
   color: white;
@@ -68,5 +68,5 @@ h1 {
 
 .clock-view .info {
   font-size: 10px;
-  margin-top: 20px;
+  margin-top: 10px;
 }

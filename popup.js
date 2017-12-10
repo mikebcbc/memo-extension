@@ -8,20 +8,36 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 
 document.addEventListener('DOMContentLoaded', () => {  
   var currentTabUrl = null;
-  var authToken = null;
+  
+  function showClockView() {
+    $('.login-view').hide();
+    $('.clock-view').show().css('display', 'flex');
+  };
 
+  function showLoginView() {
+    $('.clock-view').hide();
+    $('.login-view').show().css('display', 'flex');
+  }
+
+  // Timer & tab logic
+  chrome.tabs.getSelected(null, function(tab) {
+    currentTab = tab;
+  });
+
+  // Authentication logic
   chrome.storage.sync.get('authToken', function(data) {
-    if (typeof data.authToken !== undefined) {
-      authToken = data.authToken;
+    if (data.authToken !== undefined) {
       chrome.runtime.sendMessage({command: "SetToken", authToken: data.authToken});
       showClockView();
     }
   });
 
-  function showClockView() {
-    $('.login-view').hide();
-    $('.clock-view').show().css('display', 'flex');
-  }
+  chrome.storage.onChanged.addListener(function(changes, areaName) {
+    if (areaName == 'sync' && changes.authToken.oldValue) {
+      chrome.runtime.sendMessage({command: "SetToken", authToken: null});
+      showLoginView();
+    }
+  });
 
   $('.login-form').submit(function(e) {
     e.preventDefault();
@@ -46,16 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   })
 
-  // Timer & tab logic
-  chrome.tabs.getSelected(null, function(tab) {
-    currentTab = tab;
-  });
-
-  // $('#start').on('click', function() {
-  //   chrome.runtime.sendMessage({command: "StartTimer", tabId: currentTab.id, tabUrl: currentTab.url});
-  // });
-
-  // $('#stop').on('click', function () {
-  //   chrome.runtime.sendMessage({command: "StopTimer"});
-  // });
+  $('.logout').click(function() {
+    chrome.storage.sync.remove('authToken');
+  })
 });
