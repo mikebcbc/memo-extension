@@ -9,7 +9,7 @@ var timer = new Tock({
   }
 });
 
-$.get("http://localhost:3001/contents", function(data) {
+$.get("https://secret-island-23486.herokuapp.com/contents", function(data) {
   contentArr = data.map(function(content) {
     return {url: content.link, id: content._id};
   })
@@ -30,9 +30,10 @@ function postContent(content) {
       'Authorization': "Bearer " + authToken
     },
     success: function(data) {
+      console.log(data.newContent.contentId._id);
       $.ajax({
         type: 'GET',
-        url: "https://secret-island-23486.herokuapp.com/users/io/" + data.contentId,
+        url: "https://secret-island-23486.herokuapp.com/users/io/" + data.newContent.contentId._id,
         headers: {
           'Authorization': "Bearer " + authToken
         },

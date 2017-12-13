@@ -3,7 +3,7 @@
 
   "name": "Memo Extension",
   "description": "Companion extension for Memo",
-  "version": "1.0",
+  "version": "1.0.2",
   "browser_action": {
     "default_popup": "popup.html"
   },
