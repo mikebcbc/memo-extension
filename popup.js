@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     $.ajax({
       type: "POST",
-      url: "http://localhost:3001/auth/login",
+      url: "https://secret-island-23486.herokuapp.com/auth/login",
       datatype: 'json',
       data: JSON.stringify(loginInfo),
       headers: {

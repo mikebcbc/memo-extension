@@ -22,7 +22,7 @@ function sendCurrentTime(time) {
 function postContent(content) {
   $.ajax({
     type: "POST",
-    url: "http://localhost:3001/users/content",
+    url: "https://secret-island-23486.herokuapp.com/users/content",
     datatype: 'json',
     data: JSON.stringify(content),
     headers: {
@@ -30,7 +30,16 @@ function postContent(content) {
       'Authorization': "Bearer " + authToken
     },
     success: function(data) {
-      console.log(data);
+      $.ajax({
+        type: 'GET',
+        url: "https://secret-island-23486.herokuapp.com/users/io/" + data.contentId,
+        headers: {
+          'Authorization': "Bearer " + authToken
+        },
+        success: function() {
+          console.log('IO updated');
+        }
+      })
     }
   });
 };
